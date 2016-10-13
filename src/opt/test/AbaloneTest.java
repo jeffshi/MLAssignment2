@@ -16,13 +16,13 @@ import java.text.*;
  * find optimal weights to a neural network that is classifying abalone as having either fewer 
  * or more than 15 rings. 
  *
- * @author Hannah Lau
+ * @author Hannah Lau6
  * @version 1.0
  */
 public class AbaloneTest {
     private static Instance[] instances = initializeInstances();
 
-    private static int inputLayer = 7, hiddenLayer = 5, outputLayer = 1, trainingIterations = 1000;
+    private static int inputLayer = 7, hiddenLayer = 5, outputLayer = 1, trainingIterations = 2000;
     private static BackPropagationNetworkFactory factory = new BackPropagationNetworkFactory();
     
     private static ErrorMeasure measure = new SumOfSquaresError();
