@@ -47,7 +47,7 @@ public class VoiceGenderTest {
         }
 
         oa[0] = new RandomizedHillClimbing(nnop[0]);
-        oa[1] = new SimulatedAnnealing(1E11, .95, nnop[1]);
+        oa[1] = new SimulatedAnnealing(1E11, 0.95, nnop[1]);
         oa[2] = new StandardGeneticAlgorithm(200, 100, 10, nnop[2]);
 
                 
