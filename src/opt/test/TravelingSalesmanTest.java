@@ -55,20 +55,37 @@ public class TravelingSalesmanTest {
         HillClimbingProblem hcp = new GenericHillClimbingProblem(ef, odd, nf);
         GeneticAlgorithmProblem gap = new GenericGeneticAlgorithmProblem(ef, odd, mf, cf);
         
+        double start, trainingTime, end = 0;
+        
         RandomizedHillClimbing rhc = new RandomizedHillClimbing(hcp);      
-        FixedIterationTrainer fit = new FixedIterationTrainer(rhc, 200000);
+        FixedIterationTrainer fit = new FixedIterationTrainer(rhc, 5000);
+        start = System.nanoTime();
         fit.train();
-        System.out.println(ef.value(rhc.getOptimal()));
-        
+        end = System.nanoTime();
+        trainingTime = end - start;
+        trainingTime /= Math.pow(10,9);
+
+        System.out.println("RHC: " + ef.value(rhc.getOptimal()) + " Time: " + trainingTime);
+
         SimulatedAnnealing sa = new SimulatedAnnealing(1E12, .95, hcp);
-        fit = new FixedIterationTrainer(sa, 200000);
+        fit = new FixedIterationTrainer(sa, 5000);
+        start = System.nanoTime();
         fit.train();
-        System.out.println(ef.value(sa.getOptimal()));
-        
-        StandardGeneticAlgorithm ga = new StandardGeneticAlgorithm(200, 150, 20, gap);
-        fit = new FixedIterationTrainer(ga, 1000);
+        end = System.nanoTime();
+        trainingTime = end - start;
+        trainingTime /= Math.pow(10,9);
+
+        System.out.println("SA: " + ef.value(sa.getOptimal()) + " Time: " + trainingTime);
+
+        StandardGeneticAlgorithm ga = new StandardGeneticAlgorithm(400, 300, 40, gap);
+        fit = new FixedIterationTrainer(ga, 5000);
+        start = System.nanoTime();
         fit.train();
-        System.out.println(ef.value(ga.getOptimal()));
+        end = System.nanoTime();
+        trainingTime = end - start;
+        trainingTime /= Math.pow(10,9);
+
+        System.out.println("GA: " + ef.value(ga.getOptimal()) + " Time: " + trainingTime);
         
         // for mimic we use a sort encoding
         ef = new TravelingSalesmanSortEvaluationFunction(points);
@@ -79,9 +96,14 @@ public class TravelingSalesmanTest {
         ProbabilisticOptimizationProblem pop = new GenericProbabilisticOptimizationProblem(ef, odd, df);
         
         MIMIC mimic = new MIMIC(200, 100, pop);
-        fit = new FixedIterationTrainer(mimic, 1000);
+        fit = new FixedIterationTrainer(mimic, 5000);
+        start = System.nanoTime();
         fit.train();
-        System.out.println(ef.value(mimic.getOptimal()));
-        
+        end = System.nanoTime();
+        trainingTime = end - start;
+        trainingTime /= Math.pow(10,9);
+
+        System.out.println("MIMIC: " + ef.value(mimic.getOptimal()) + " Time: " + trainingTime);
+
     }
 }

@@ -19,9 +19,9 @@ import java.text.*;
  * @author Hannah Lau, modified by Jeff Shi for CS7641 Assignment 2
  * @version 1.0
  */
-public class VoiceGenderTest2 {
+public class VoiceGenderTest {
     private static Instance[] instances = initializeInstances("src/opt/test/voice_80split_training_noheaders_binarized.txt");
-    private static Instance[] testing = initializeInstances2("src/opt/test/voice_80split_testing_noheaders_binarized.txt");
+    private static Instance[] testing = initializeInstancesTest("src/opt/test/voice_80split_testing_noheaders_binarized.txt");
 
     private static int inputLayer = 20, hiddenLayer = 12, outputLayer = 1, trainingIterations = 5000;
     private static BackPropagationNetworkFactory factory = new BackPropagationNetworkFactory();
@@ -173,7 +173,7 @@ public class VoiceGenderTest2 {
         return data;
     }
     
-    private static Instance[] initializeInstances2(String filename) {
+    private static Instance[] initializeInstancesTest(String filename) {
 
         double[][][] attributes = new double[760][][];
 

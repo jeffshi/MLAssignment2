@@ -1,5 +1,4 @@
 package opt.test;
-
 import java.util.Arrays;
 import java.util.Random;
 
@@ -71,25 +70,47 @@ public class KnapsackTest {
         GeneticAlgorithmProblem gap = new GenericGeneticAlgorithmProblem(ef, odd, mf, cf);
         ProbabilisticOptimizationProblem pop = new GenericProbabilisticOptimizationProblem(ef, odd, df);
         
+        double start, trainingTime, end = 0;
+        
         RandomizedHillClimbing rhc = new RandomizedHillClimbing(hcp);      
-        FixedIterationTrainer fit = new FixedIterationTrainer(rhc, 200000);
+        FixedIterationTrainer fit = new FixedIterationTrainer(rhc, 5000);
+        start = System.nanoTime();
         fit.train();
-        System.out.println(ef.value(rhc.getOptimal()));
-        
+        end = System.nanoTime();
+        trainingTime = end - start;
+        trainingTime /= Math.pow(10,9);
+
+        System.out.println("RHC: " + ef.value(rhc.getOptimal()) + " Time: " + trainingTime);
+ 
         SimulatedAnnealing sa = new SimulatedAnnealing(100, .95, hcp);
-        fit = new FixedIterationTrainer(sa, 200000);
+        fit = new FixedIterationTrainer(sa, 5000);
+        start = System.nanoTime();
         fit.train();
-        System.out.println(ef.value(sa.getOptimal()));
-        
+        end = System.nanoTime();
+        trainingTime = end - start;
+        trainingTime /= Math.pow(10,9);
+
+        System.out.println("SA: " + ef.value(sa.getOptimal()) + " Time: " + trainingTime);
+
         StandardGeneticAlgorithm ga = new StandardGeneticAlgorithm(200, 150, 25, gap);
-        fit = new FixedIterationTrainer(ga, 1000);
+        fit = new FixedIterationTrainer(ga, 5000);
+        start = System.nanoTime();
         fit.train();
-        System.out.println(ef.value(ga.getOptimal()));
+        end = System.nanoTime();
+        trainingTime = end - start;
+        trainingTime /= Math.pow(10,9);
+
+        System.out.println("GA: " + ef.value(ga.getOptimal()) + " Time: " + trainingTime);
+
+        MIMIC mimic = new MIMIC(2, 1, pop);
+        fit = new FixedIterationTrainer(mimic, 5000);
+        start = System.nanoTime();
+        fit.train();
+        end = System.nanoTime();
+        trainingTime = end - start;
+        trainingTime /= Math.pow(10,9);
         
-        MIMIC mimic = new MIMIC(200, 100, pop);
-        fit = new FixedIterationTrainer(mimic, 1000);
-        fit.train();
-        System.out.println(ef.value(mimic.getOptimal()));
+        System.out.println("MIMIC: " + ef.value(mimic.getOptimal()) + " Time: " + trainingTime);
     }
 
 }
