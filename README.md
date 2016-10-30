@@ -1,7 +1,7 @@
-ABAGAIL
+CS7641 Assignment 2
 =======
 
-The library contains a number of interconnected Java packages that implement machine learning and artificial intelligence algorithms. These are artificial intelligence algorithms implemented for the kind of people that like to implement algorithms themselves.
+This GitHub project is the result of my submission for Assignment 2 of my CS7641: Machine Learning course at Georgia Tech. The files uploaded include the original ABAGAIL source code, my created and modified code, and my analysis documents and writeup.
 
 Usage
 ------
